@@ -8,23 +8,25 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      # Add steps to build your project and generate the executable
-      - name: Build Executable
-        run: |
-          # Add commands to build your project and generate the .exe file
-          # For example, if you're using dotnet, you might use commands like:
-          dotnet build -c Release
-          dotnet publish -c Release -o ./publish_output
 
-      # Upload the .exe file as an artifact
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.0
+      
+      - name: Restore NuGet packages
+        run: nuget restore WpfApp1.sln
+
+      - name: Build WPF project
+        run: msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" WpfApp1.csproj
+
+      # Add other necessary steps like signing, publishing, etc.
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: MyExecutable
-          path: ./publish_output/*.exe
+          name: WpfAppExecutable
+          path: /path/to/your/executable/WpfApp1/bin/Release/*.exe
