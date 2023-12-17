@@ -60,7 +60,7 @@ jobs:
       - name: Build WPF project
         run: |
           $env:Path += ";$env:MSBUILD_PATH"
-          msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" WpfApp1.csproj
+          msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" WpfApp1\WpfApp1\WpfApp1.csproj
 
       # Add other necessary steps like signing, publishing, etc.
 
