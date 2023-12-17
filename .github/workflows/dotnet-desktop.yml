@@ -14,6 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      # Other steps for building, publishing, or deploying your project
+      # Add steps to build your project and generate the executable
+      - name: Build Executable
+        run: |
+          # Add commands to build your project and generate the .exe file
+          # For example, if you're using dotnet, you might use commands like:
+          dotnet build -c Release
+          dotnet publish -c Release -o ./publish_output
 
-      # Any steps related to test execution and test artifacts upload have been removed
+      # Upload the .exe file as an artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: MyExecutable
+          path: ./publish_output/*.exe
