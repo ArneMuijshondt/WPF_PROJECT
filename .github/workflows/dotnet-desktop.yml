@@ -1,3 +1,37 @@
+# name: Build and Deploy
+
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+
+# jobs:
+#   build:
+#     runs-on: windows-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Setup MSBuild
+#         uses: microsoft/setup-msbuild@v1.0.0
+      
+#       - name: Restore NuGet packages
+#         run: nuget restore WpfApp1.sln
+
+#       - name: Build WPF project
+#         run: msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" WpfApp1.csproj
+
+#       # Add other necessary steps like signing, publishing, etc.
+
+#       - name: Upload Artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: WpfAppExecutable
+#           path: /path/to/your/executable/WpfApp1/bin/Release/*.exe
+
+
 name: Build and Deploy
 
 on:
@@ -10,18 +44,23 @@ jobs:
   build:
     runs-on: windows-latest
 
+    env:
+      MSBUILD_PATH: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin'
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.0
+        run: echo "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin" >> $GITHUB_PATH
       
       - name: Restore NuGet packages
         run: nuget restore WpfApp1.sln
 
       - name: Build WPF project
-        run: msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" WpfApp1.csproj
+        run: |
+          $env:Path += ";$env:MSBUILD_PATH"
+          msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" WpfApp1.csproj
 
       # Add other necessary steps like signing, publishing, etc.
 
