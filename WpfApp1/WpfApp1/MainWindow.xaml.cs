@@ -57,7 +57,7 @@ namespace WpfApp1
                 DisplayGroupData("Muisjes", group1Users);
                 DisplayGroupData("Minikikkers", group2Users);
                 DisplayGroupData("Maxikikkers", group3Users);
-            }
+            }  
         }
 
         private void DisplayGroupData(string groupName, List<User> users)
