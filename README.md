@@ -1,6 +1,6 @@
-# Arne_Muijshondt_1ITF05_r0938846_IOT_project
-This repository contains everything to make an automatic mouse trap. 
-I made this project for my course IoT Essentials.
+# Arne_Muijshondt_r0938846_DevOps&Security_WPF_PROJECT
+This repository contains everything needed to get my WPF and SQLite application up and running.
+I made this project for my course DevOps & Security.
 
 ![Thomas More University of Applied Sciences](logo.svg)
 > **Note:** This is a **private** repo, containing **individual work**.
